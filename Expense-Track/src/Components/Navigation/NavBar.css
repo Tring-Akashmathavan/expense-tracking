@@ -1,0 +1,18 @@
+.tool-bar{
+    color: #fff;
+    background-color: #333;
+}
+
+.active-button {
+    background-color: #1976d2;
+    color: white;
+  }
+  
+  .active-button:hover {
+    background-color: #EBA832;
+  }
+
+.tool-bar .signbutton{
+    color: #fff;
+    text-transform: capitalize;
+}
