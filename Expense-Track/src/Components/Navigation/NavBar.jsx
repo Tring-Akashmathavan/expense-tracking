@@ -38,16 +38,10 @@ const NavBar = () => {
 
         {isAuthenticated && location.pathname !== "/dashboard" && (
           <Button
+          className="signbutton"
             color="inherit"
             onClick={handleDashboard}
-            sx={{
-              backgroundColor: location.pathname === "/dashboard" ? "#1976d2" : "inherit",
-              color: location.pathname === "/dashboard" ? "black" : "white",
-              "&:hover": {
-                backgroundColor: location.pathname === "/dashboard" ? "#1976d2" : "rgba(0, 0, 0, 0.1)",
-              },
-              marginRight: "8px",
-            }}
+
           >
             Dashboard
           </Button>
@@ -78,7 +72,7 @@ const NavBar = () => {
               sx={{
                 backgroundColor: location.pathname === "/signin" ? "#1976d2" : "inherit", 
                 color: location.pathname === "/signin" ? "black" : "white", 
-                "&:hover": {
+                "&:hover": { 
                   backgroundColor: location.pathname === "/signin" ? "#1976d2" : "rgba(0, 0, 0, 0.1)", 
                 },
                 marginRight: "8px",
