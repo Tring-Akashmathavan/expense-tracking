@@ -1,15 +1,14 @@
 import React from "react";
-import { Button, Typography, Box } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 import PushPinIcon from "@mui/icons-material/PushPin";
-import { useNavigate } from "react-router-dom";
+import Money from "../assets/CoverMoney.jpg";
+
 
 const Home = () => {
-  const navigate = useNavigate();
-
   return (
     <Box
       sx={{
-        height: "90vh",
+        height: "91vh",
         backgroundPosition: "center",
         color: "#fff",
         display: "flex",
@@ -17,18 +16,22 @@ const Home = () => {
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
+        backgroundImage : `url(${Money})`,
+        backgroundSize: "cover",  
+        backgroundRepeat: "no-repeat" ,
+        backgroundColor : "#333"
       }}
     >
 
       <Box
         sx={{
-          backgroundColor: "#f6f5f4",
-          color: "#000",
+          backgroundColor: "#fff",
+          color: "#333",
           padding: "30px",
           borderRadius: "12px",
           boxShadow: "4px 4px 13px rgba(0, 0, 0, 0.3)",
           display: "inline-block",
-          transform: "rotate(-5deg)",
+          // transform: "rotate(0deg)",
           position: "relative",
           marginBottom: "20px",
           width: "50%",
@@ -46,10 +49,7 @@ const Home = () => {
           }}
         />
         <Typography variant="h4" gutterBottom>
-          "Save Money And Money Will Save You."
-        </Typography>
-        <Typography variant="h6" sx={{ fontStyle: "italic" }}>
-          – Dave Ramsey
+          Save Money And Money Will Save You.
         </Typography>
       </Box>
     </Box>

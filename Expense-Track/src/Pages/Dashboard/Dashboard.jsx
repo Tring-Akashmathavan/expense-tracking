@@ -9,9 +9,10 @@ import {
   Dialog,
   DialogTitle,
   DialogActions,
+  Pagination,
 } from "@mui/material";
-import AddTransaction from "../Components/Expense/AddExpense";
-import ExpenseTable from "../Components/Expense/ExpenseTable";
+import AddTransaction from "../../Components/Expense/AddExpense";
+import ExpenseTable from "../../Components/Expense/ExpenseTable";
 import { useOutletContext } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -20,10 +21,10 @@ import {
   CREATE_TRANSACTION,
   UPDATE_TRANSACTION,
   DELETE_TRANSACTION,
-} from "../GraphQL/queries";
+} from "../../GraphQL/queries";
 
 import "./Dashboard.css";
-import { showErrorToast } from "../Utils/toast";
+import { showErrorToast } from "../../Utils/toast";
 
 const Dashboard = () => {
   const { userId } = useOutletContext() || {};
@@ -34,6 +35,12 @@ const Dashboard = () => {
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [transactionToDelete, setTransactionToDelete] = useState(null);
   const navigate = useNavigate();
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(4);
+
+  const user = JSON.parse(localStorage.getItem("user"));
+  const userName = user?.name || "User";
 
   const {
     data,
@@ -55,6 +62,19 @@ const Dashboard = () => {
     }
   }, [data, queryError, userId]);
 
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentTransactions = transactions.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
+  const totalPages = Math.ceil(transactions.length / itemsPerPage);
+
+  const handlePageChange = (event, page) => {
+    setCurrentPage(page);
+  };
+
   const totalIncome = transactions
     .filter((txn) => txn.type === "INCOME")
     .reduce((sum, txn) => sum + txn.amount, 0);
@@ -65,7 +85,6 @@ const Dashboard = () => {
 
   const balance = totalIncome > 0 ? totalIncome - totalExpense : 0;
 
-  // Add Transaction Mutation
   const [createTransaction] = useMutation(CREATE_TRANSACTION, {
     onCompleted: () => refetch(),
     onError: (error) => setError(error.message),
@@ -138,18 +157,16 @@ const Dashboard = () => {
 
   return (
     <Box sx={{ p: 3 }} className="Dashboard-Box">
-      {/* <Typography variant="h4" gutterBottom>
-        Expense Management System
-      </Typography> */}
+      <Typography variant="h4" gutterBottom>
+        Welcome, {userName}!
+      </Typography>
 
-      {/* Error Message */}
       {error && (
         <Alert severity="error" onClose={() => setError(null)} sx={{ mb: 3 }}>
           {error}
         </Alert>
       )}
 
-      {/* Total Income, Expense, and Balance */}
       <Box sx={{ display: "flex", gap: 8, mb: 6 }}>
         <Typography variant="h6" color="green">
           Total Income: <strong>${totalIncome.toFixed(2)}</strong>
@@ -189,17 +206,29 @@ const Dashboard = () => {
       >
         Charts
       </Button>
+
       {loading ? (
         <CircularProgress />
       ) : (
-        <ExpenseTable
-          transactions={transactions}
-          onEdit={(transaction) => {
-            setSelectedTransaction(transaction);
-            setOpen(true);
-          }}
-          onDelete={handleDeleteTransaction}
-        />
+        <>
+          <ExpenseTable
+            transactions={currentTransactions} 
+            onEdit={(transaction) => {
+              setSelectedTransaction(transaction);
+              setOpen(true);
+            }}
+            onDelete={handleDeleteTransaction}
+          />
+
+          <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={handlePageChange}
+              color="primary"
+            />
+          </Box>
+        </>
       )}
 
       <Dialog

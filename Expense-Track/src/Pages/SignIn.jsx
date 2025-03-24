@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { TextField, Button, Typography, Box, Link } from "@mui/material";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { showErrorToast, showSuccessToast } from "../Utils/toast";
-
 import { SIGN_IN } from "../GraphQL/queries";
-
+import { inputStyle } from "./formStyle";
 const SignIn = ({ toggleForm }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +25,7 @@ const SignIn = ({ toggleForm }) => {
       const { data } = await loginUser({ variables: { email, password } });
 
       localStorage.setItem("token", data.loginUser.token);
-      localStorage.setItem("user", JSON.stringify(data.loginUser.user)); 
+      localStorage.setItem("user", JSON.stringify(data.loginUser.user));
 
       console.log("User logged in:", data.loginUser.user);
 
@@ -56,6 +55,7 @@ const SignIn = ({ toggleForm }) => {
           autoFocus
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          sx={inputStyle}
         />
         <TextField
           className="form-input"
@@ -69,6 +69,7 @@ const SignIn = ({ toggleForm }) => {
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          sx={inputStyle}
         />
         <Button
           className="form-submit-button"
@@ -83,7 +84,7 @@ const SignIn = ({ toggleForm }) => {
         {error && <p style={{ color: "red" }}>{error.message}</p>}
 
         <Link className="form-toggle-link" href="/SignUp" onClick={toggleForm}>
-          Don't have an account? Sign Up
+          Don't have an account? Sign up
         </Link>
       </Box>
       <ToastContainer />

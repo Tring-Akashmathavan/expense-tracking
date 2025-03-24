@@ -18,6 +18,7 @@ const PieChartPage = () => {
         {/* Date-wise Chart Button */}
         <Grid item xs={12} md={3}>
           <Button
+          className="chart-button"
             fullWidth
             variant="contained"
             onClick={() =>
@@ -30,6 +31,7 @@ const PieChartPage = () => {
 
         <Grid item xs={12} md={3}>
           <Button
+            className="chart-button"
             fullWidth
             variant="contained"
             onClick={() =>
@@ -42,6 +44,7 @@ const PieChartPage = () => {
 
         <Grid item xs={12} md={3}>
           <Button
+            className="chart-button"
             fullWidth
             variant="contained"
             onClick={() =>
@@ -54,13 +57,9 @@ const PieChartPage = () => {
 
       </Grid>
 
-      <Button
-        variant="outlined"
-        onClick={() => navigate("/dashboard")}
-        sx={{ mt: 3 }}
-      >
-        Back to Dashboard
-      </Button>
+           <Button onClick={() => navigate(-1)} sx={{ mt: 2 }} className="back-button">
+             Back
+           </Button>
     </Box>
   );
 };

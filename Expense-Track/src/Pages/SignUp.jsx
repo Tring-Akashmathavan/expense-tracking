@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { TextField, Button, Typography, Box, Link } from "@mui/material";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer} from "react-toastify";
 import { showErrorToast, showSuccessToast } from "../Utils/toast";
 import { SIGN_UP } from "../GraphQL/queries";
+import { inputStyle } from "./formStyle";
 
 const SignUp = ({ toggleForm }) => {
   const [name, setName] = useState("");
@@ -68,6 +69,7 @@ const SignUp = ({ toggleForm }) => {
           autoFocus
           value={name}
           onChange={(e) => setName(e.target.value)}
+          sx={inputStyle}
         />
         <TextField
           className="form-input"
@@ -80,6 +82,8 @@ const SignUp = ({ toggleForm }) => {
           autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          sx={inputStyle}
+
         />
         <TextField
           className="form-input"
@@ -93,6 +97,8 @@ const SignUp = ({ toggleForm }) => {
           autoComplete="new-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          sx={inputStyle}
+
         />
         <TextField
           className="form-input"
@@ -106,6 +112,8 @@ const SignUp = ({ toggleForm }) => {
           autoComplete="new-password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
+          sx={inputStyle}
+
         />
         <Button
           className="form-submit-button"

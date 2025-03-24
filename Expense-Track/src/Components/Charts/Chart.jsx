@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { Box, Typography, Button } from "@mui/material";
+import "../Charts/PieChart/PieChartPage.css"
 
 const ChartPage = () => {
   const navigate = useNavigate();
@@ -17,7 +18,8 @@ const ChartPage = () => {
   }));
 
   return (
-    <Box sx={{ p: 3 }}>
+    <Box sx={{ p: 3 }} className="box-pie-charts">
+      
       <Typography variant="h4" gutterBottom>
         Expense Tracker - Charts
       </Typography>
@@ -51,14 +53,9 @@ const ChartPage = () => {
         <Typography>No transaction data available.</Typography>
       )}
 
-      <Button
-        variant="contained"
-        onClick={() => navigate("/dashboard")}
-        sx={{ mt: 3 }}
-        style={{textTransform : "capitalize"}}
-      >
-        Back to Dashboard
-      </Button>
+            <Button onClick={() => navigate(-1)} sx={{ mt: 2 }} className="back-button">
+              Back
+            </Button>
     </Box>
   );
 };
