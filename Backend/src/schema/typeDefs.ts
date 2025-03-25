@@ -17,7 +17,6 @@ export const typeDefs = `
         createdAt: String!
         updatedAt: String
         categories: [Category]!
-
     }
 
     type Category {
