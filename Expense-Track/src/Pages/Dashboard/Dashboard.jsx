@@ -71,7 +71,7 @@ const Dashboard = () => {
 
   const totalPages = Math.ceil(transactions.length / itemsPerPage);
 
-  const handlePageChange = (event, page) => {
+  const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 

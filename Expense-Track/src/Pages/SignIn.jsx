@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 import { showErrorToast, showSuccessToast } from "../Utils/toast";
 import { SIGN_IN } from "../GraphQL/queries";
 import { inputStyle } from "./formStyle";
-const SignIn = ({ toggleForm }) => {
+const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginUser, { loading, error }] = useMutation(SIGN_IN);
@@ -83,7 +83,7 @@ const SignIn = ({ toggleForm }) => {
         </Button>
         {error && <p style={{ color: "red" }}>{error.message}</p>}
 
-        <Link className="form-toggle-link" href="/SignUp" onClick={toggleForm}>
+        <Link className="form-toggle-link" href="/SignUp">
           Don't have an account? Sign up
         </Link>
       </Box>

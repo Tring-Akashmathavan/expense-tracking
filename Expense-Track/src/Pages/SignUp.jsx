@@ -7,7 +7,7 @@ import { showErrorToast, showSuccessToast } from "../Utils/toast";
 import { SIGN_UP } from "../GraphQL/queries";
 import { inputStyle } from "./formStyle";
 
-const SignUp = ({ toggleForm }) => {
+const SignUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -126,7 +126,7 @@ const SignUp = ({ toggleForm }) => {
           {loading ? "Signing Up..." : "Sign Up"}
         </Button>
         {error && <p style={{ color: "red" }}>{error.message}</p>}
-        <Link className="form-toggle-link" href="/SignIn" onClick={toggleForm}>
+        <Link className="form-toggle-link" href="/SignIn" >
           Already have an account? Sign In
         </Link>
       </Box>

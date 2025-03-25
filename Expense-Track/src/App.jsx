@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import NavBar from "./Components/Navigation/NavBar";
 import Dashboard from "./Pages/Dashboard/Dashboard";
-import AddExpense from "./Components/Expense/AddExpense";
-import ExpenseTable from "./Components/Expense/ExpenseTable";
 import PrivateRoute from "./Route/PrivateRoute";
 import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
@@ -37,9 +35,6 @@ const App = () => {
             <Route path="/charts/date" element={<DatePieChartPage />} />
             <Route path="/charts/month" element={<MonthPieChartPage />} />
             <Route path="/charts/year" element={<YearPieChartPage />} />
-            <Route path="/addexpense" element={<AddExpense />} />
-            <Route path="/expensetable" element={<ExpenseTable />} />            
-
           </Route>
 
           <Route path="/" element={<Navigate to="/home" />} />
